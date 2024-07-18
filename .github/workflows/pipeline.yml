@@ -64,10 +64,9 @@ jobs:
       - name: Test app with live database
         run: echo connect to a hosted database and run tests on that
 
-    deploy-to-production:
+  deploy-to-production:
     needs: staging
     runs-on: ubuntu-latest
     steps:
       - name: actually deploy the app
         run: echo do loads of stuff
-
