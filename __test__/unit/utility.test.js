@@ -1,3 +1,5 @@
+const { describe, expect, test } = require("@jest/globals");
+
 const { capitalise } = require("../../utils/util");
 
 describe("capitalise()", () => {
