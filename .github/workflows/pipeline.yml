@@ -12,15 +12,15 @@ jobs:
       - name: Say Hello
         run: echo 'Hello peeps from the pipeline!'
 
-  test-utils:
+  unit-tests:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout and clone repo
         uses: actions/checkout@v3
       - name: Install dependencies
         run: npm install
-      - name: Test utils
-        run: npm run test-utils
+      - name: run unit tests
+        run: npm run test-unit
 
   lint:
     runs-on: ubuntu-latest
@@ -32,9 +32,9 @@ jobs:
       - name: check lint
         run: npm run lint
 
-  test-app:
+  e2e-test:
     needs:
-      - test-utils
+      - unit-tests
       - lint
     runs-on: ubuntu-latest
     steps:
@@ -51,10 +51,10 @@ jobs:
       - name: Install dependencies
         run: npm install
       - name: Test app
-        run: PGDATABASE=test_db PGUSER=mr_testerson PGPASSWORD=pa55w0rd npm run test-app
+        run: PGDATABASE=test_db PGUSER=mr_testerson PGPASSWORD=pa55w0rd npm run test-e2e
 
-  test-app-live-db:
-    needs: test-app
+  staging:
+    needs: e2e-tests
     runs-on: ubuntu-latest
     steps:
       - name: Checkout and clone repo
@@ -62,4 +62,12 @@ jobs:
       - name: Install dependencies
         run: npm install
       - name: Test app with live database
-        run: NODE_ENV=production DATABASE_URL=${{ secrets.DATABASE_URL }} npm run test-app
+        run: echo connect to a hosted database and run tests on that
+
+    deploy-to-production:
+    needs: staging
+    runs-on: ubuntu-latest
+    steps:
+      - name: actually deploy the app
+        run: echo do loads of stuff
+
