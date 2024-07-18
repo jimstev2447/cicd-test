@@ -32,7 +32,7 @@ jobs:
       - name: check lint
         run: npm run lint
 
-  e2e-test:
+  e2e-tests:
     needs:
       - unit-tests
       - lint
