@@ -1,12 +1,16 @@
 const app = require("express")();
 const db = require("./db/connection");
+const { capitalise } = require("./utils/util");
 
-app.get("/api/dogs", (req, res, next) => {
-  db.query("SELECT * FROM dogs")
-    .then(({ rows }) => {
-      res.status(200).send({ dogs: rows });
-    })
-    .catch(next);
+app.get("/api", (req, res, next) => {
+  try {
+    const greeting = "hello world";
+    const body = {};
+    body.message = capitalise(greeting);
+    res.status(200).send(body);
+  } catch (err) {
+    next(err);
+  }
 });
 
 module.exports = app;

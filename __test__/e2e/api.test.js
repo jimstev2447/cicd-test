@@ -2,20 +2,15 @@ const { describe, expect, test, beforeEach } = require("@jest/globals");
 const request = require("supertest");
 
 const app = require("../../app");
-const seed = require("../../db/seed");
-
-beforeEach(() => {
-  return seed();
-});
 
 describe("app", () => {
   describe("/api", () => {
     test("200: gives some dogs", () => {
       return request(app)
-        .get("/api/dogs")
+        .get("/api")
         .then(({ body }) => {
-          const { dogs } = body;
-          expect(dogs.length).toBe(2);
+          const { message } = body;
+          expect(message).toBe("Hello world");
         });
     });
   });
