@@ -8,7 +8,8 @@
     "test-unit": "jest unit",
     "test-e2e": "jest e2e",
     "seed-dev": "node ./db/runSeed.js",
-    "lint": "eslint"
+    "lint": "eslint",
+    "start": "node listen.js"
   },
   "keywords": [],
   "author": "",
