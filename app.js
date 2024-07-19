@@ -3,10 +3,10 @@ const { capitalise } = require("./utils/util");
 
 app.get("/api", (req, res, next) => {
   try {
-    const partOfGreeting = "world";
+    const partOfGreeting = "worldzzzzzzzz";
     const greeting = "hello";
     const body = {};
-    body.message = capitalise(greeting);
+    body.message = capitalise(greeting) + " " + partOfGreeting;
     res.status(200).send(body);
   } catch (err) {
     next(err);
