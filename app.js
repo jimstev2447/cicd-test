@@ -1,5 +1,4 @@
 const app = require("express")();
-const db = require("./db/connection");
 const { capitalise } = require("./utils/util");
 
 app.get("/api", (req, res, next) => {
